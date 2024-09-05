@@ -11,6 +11,7 @@ const Canvas = () => {
   const [canvasContext, setCanvasContext] =
     useState<CanvasRenderingContext2D | null>(null);
   const [textInput, setTextInput] = useState("");
+  const [currentColor, setCurrentColor] = useState<string>("red");
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -41,6 +42,7 @@ const Canvas = () => {
 
     if (currentTool === "text") {
       canvasContext.font = "18px Roboto";
+      canvasContext.fillStyle = currentColor;
       canvasContext.fillText(textInput, x, y);
     }
   };
@@ -53,6 +55,7 @@ const Canvas = () => {
     const y = e.clientY - rect.top;
 
     if (currentTool === "draw") {
+      canvasContext.strokeStyle = currentColor;
       canvasContext.lineTo(x, y);
       canvasContext.stroke();
     }
@@ -68,10 +71,21 @@ const Canvas = () => {
   return (
     <div className={styles.canvasWrapper}>
       <Tools currentTool={currentTool} setCurrentTool={setCurrentTool} />
+      <label htmlFor="color">Color:</label>
+      <input
+        id="color"
+        type="color"
+        name="color"
+        value={currentColor}
+        onChange={(event) => setCurrentColor(event.target.value)}
+      />
       {currentTool === "text" && (
         <>
+          <label htmlFor="textbox">Text box</label>
           <input
+            id="textbox"
             type="text"
+            name="textbox"
             value={textInput}
             onChange={(event) => setTextInput(event.target.value)}
           />
