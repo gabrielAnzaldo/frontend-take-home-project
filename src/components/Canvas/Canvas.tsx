@@ -10,6 +10,7 @@ const Canvas = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [canvasContext, setCanvasContext] =
     useState<CanvasRenderingContext2D | null>(null);
+  const [textInput, setTextInput] = useState("");
 
   useEffect(() => {
     if (canvasRef.current) {
@@ -37,6 +38,11 @@ const Canvas = () => {
 
     canvasContext.beginPath();
     setIsDrawing(true);
+
+    if (currentTool === "text") {
+      canvasContext.font = "18px Roboto";
+      canvasContext.fillText(textInput, x, y);
+    }
   };
 
   const drawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -60,8 +66,21 @@ const Canvas = () => {
   };
 
   return (
-    <div>
+    <div className={styles.canvasWrapper}>
       <Tools currentTool={currentTool} setCurrentTool={setCurrentTool} />
+      {currentTool === "text" && (
+        <>
+          <input
+            type="text"
+            value={textInput}
+            onChange={(event) => setTextInput(event.target.value)}
+          />
+          <small>
+            Type here, then select the position in which you want the input text
+            to appear
+          </small>
+        </>
+      )}
       <canvas
         ref={canvasRef}
         className={styles.canvas}

@@ -1,3 +1,17 @@
 .canvas {
   border: solid 1px grey;
 }
+
+.canvasWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.canvasWrapper input {
+  margin-bottom: 12px;
+  width: 50%;
+}
+
+.canvasWrapper small {
+  margin-bottom: 12px;
+}
