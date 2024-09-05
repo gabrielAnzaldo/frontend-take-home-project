@@ -1,17 +1,24 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState } from "react";
+import Tools from "../Tools";
 import styles from "./canvas.module.css";
+
+type ToolOptions = "draw" | "text" | "erase";
 
 const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [currentTool, setCurrentTool] = useState<ToolOptions>("draw");
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={styles.canvas}
-      width={450}
-      height={382}
-    />
+    <>
+      <Tools currentTool={currentTool} setCurrentTool={setCurrentTool} />
+      <canvas
+        ref={canvasRef}
+        className={styles.canvas}
+        width={450}
+        height={382}
+      />
+    </>
   );
 };
 
