@@ -2,3 +2,13 @@
   border-color: black;
   background-color: white;
 }
+
+.toolsWrapper {
+  padding: 12px 12px 12px 0;
+  width: 100%;
+}
+
+.toolsWrapper button {
+  margin-right: 8px;
+  padding: 8px;
+}

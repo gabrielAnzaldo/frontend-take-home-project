@@ -1,5 +1,5 @@
 import styles from "./tools.module.css";
-type ToolOptions = "draw" | "text" | "erase";
+import { ToolOptions } from "@/types";
 
 type ToolsProps = {
   currentTool: string;
@@ -7,9 +7,8 @@ type ToolsProps = {
 };
 
 const Tools = ({ currentTool, setCurrentTool }: ToolsProps) => {
-  console.log("test: ", currentTool);
   return (
-    <div>
+    <div className={styles.toolsWrapper}>
       <button
         onClick={() => setCurrentTool("draw")}
         className={currentTool === "draw" ? styles.selected : ""}
