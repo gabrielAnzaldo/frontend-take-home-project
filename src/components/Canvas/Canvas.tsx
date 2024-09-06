@@ -52,15 +52,6 @@ const Canvas = () => {
       canvasContext.fillStyle = currentColor;
       canvasContext.fillText(textInput, x, y);
     }
-
-    // erase tool
-    if (currentColor === "erase") {
-      canvasContext.globalCompositeOperation = "destination-out";
-      canvasContext.beginPath();
-      canvasContext.arc(x, y, eraserToolSize / 2, 0, Math.PI * 2, false);
-      canvasContext.fill();
-      canvasContext.globalCompositeOperation = "source-over";
-    }
   };
 
   const drawing = (e: React.MouseEvent<HTMLCanvasElement>) => {
@@ -99,6 +90,7 @@ const Canvas = () => {
     if (currentTool === "erase") {
       return (
         <div
+          data-testid="eraser-cursor"
           style={{
             position: "absolute",
             pointerEvents: "none",
