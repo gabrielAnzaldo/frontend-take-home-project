@@ -150,6 +150,7 @@ const Canvas = () => {
       )}
       <div style={{ position: "relative", display: "inline-block" }}>
         <canvas
+          role="img"
           ref={canvasRef}
           className={styles.canvas}
           width={450}
