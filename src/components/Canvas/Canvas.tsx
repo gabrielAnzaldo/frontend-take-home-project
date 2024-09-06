@@ -140,6 +140,7 @@ const Canvas = () => {
             id="eraseTool"
             type="range"
             min="10"
+            role="slider"
             max="50"
             step={10}
             value={eraserToolSize}
