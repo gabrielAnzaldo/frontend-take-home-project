@@ -1,3 +1,4 @@
+import React from "react";
 import styles from "./tools.module.css";
 import { ToolOptions } from "@/types";
 

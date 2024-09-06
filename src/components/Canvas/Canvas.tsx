@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Tools from "../Tools";
 import { ToolOptions } from "@/types";
 import styles from "./canvas.module.css";
