@@ -2,7 +2,7 @@
 
 - I focus more on the logic, instead of layout/icons/appearence.
 - For the erase tool, I choose an approach which is more natural for the end user.
-- I added some unit and integrations tests.
+- I added some unit and integrations tests, use: npm run test
 - In order to run the app, you can follow the same steps at: [SETUP GUIDE](SETUP.md)
 
 # Classkick Front End Engineering Take Home Project
