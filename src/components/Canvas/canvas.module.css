@@ -15,3 +15,14 @@
 .canvasWrapper small {
   margin-bottom: 12px;
 }
+
+.canvasEraserWrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.eraserCursor {
+  position: absolute;
+  pointer-events: none;
+  border: solid 2px green;
+}

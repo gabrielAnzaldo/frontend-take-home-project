@@ -1,15 +1,14 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useState } from "react";
 import Tools from "../Tools";
 import { ToolOptions } from "@/types";
+import { useCanvasContext } from "../../app/hooks/useCanvasContext";
 import styles from "./canvas.module.css";
 
 const Canvas = () => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const { canvasRef, canvasContext } = useCanvasContext();
   const [currentTool, setCurrentTool] = useState<ToolOptions>("draw");
   const [isDrawing, setIsDrawing] = useState(false);
-  const [canvasContext, setCanvasContext] =
-    useState<CanvasRenderingContext2D | null>(null);
   const [textInput, setTextInput] = useState("");
   const [currentColor, setCurrentColor] = useState<string>("#FF0000");
   // have a visual indicator for eraser tool size,
@@ -19,21 +18,6 @@ const Canvas = () => {
     x: 0,
     y: 0,
   });
-
-  useEffect(() => {
-    if (canvasRef.current) {
-      const context = canvasRef.current.getContext("2d");
-      if (context) {
-        setCanvasContext(context);
-        // shape used to join two line segments
-        context.lineJoin = "round";
-        // end points of lines
-        context.lineCap = "round";
-        // thickness of lines
-        context.lineWidth = 4;
-      }
-    }
-  }, []);
 
   // drawing
   const handleDrawingInit = (event: React.MouseEvent<HTMLCanvasElement>) => {
@@ -90,11 +74,9 @@ const Canvas = () => {
     if (currentTool === "erase") {
       return (
         <div
+          className={styles.eraserCursor}
           data-testid="eraser-cursor"
           style={{
-            position: "absolute",
-            pointerEvents: "none",
-            border: "solid 2px green",
             left: mousePosition.x - eraserToolSize / 2,
             top: mousePosition.y - eraserToolSize / 2,
             width: eraserToolSize,
@@ -148,7 +130,7 @@ const Canvas = () => {
           />
         </>
       )}
-      <div style={{ position: "relative", display: "inline-block" }}>
+      <div className={styles.canvasEraserWrapper}>
         <canvas
           role="img"
           ref={canvasRef}
